@@ -9,7 +9,7 @@ def show_title():
 
 
 def show_menu():
-    print('#-----------------------------#')
+    print('\n#-----------------------------#')
     print('#-------------MENU------------#')
     print('#-----------------------------#')
     print('\nSelect the operation you want to perform:')
@@ -76,20 +76,39 @@ def search_book(books):
 
     for book in books:
         if name == book['name']:
-            validate = True
+            validate = True  # Valida que foi encontrado o livro
+            position = books.index(book)  # Captura posição do livro na lista
 
     if not validate:
-        print("Book not found!")
+        print("\nBook not found!\n")
         return
 
     operation = 1
     while operation != 0:
         if validate:
-            print("\nWhat do you like to do:\n1 - Delete the book\n2- Change name\n0 - End Search ")
+            print("\nWhat do you like to do:\n1 - Delete the book\n2 - Change name\n0 - End Search ")
             operation = int(input("\nYour selection: "))
+            if operation == 1:
+                operation = delete_book(books, position)
+            elif operation == 2:
+                operation = change_name(books, position)
+            elif operation == 0:
+                print("\n\n")
+                return
+            else:
+                print("\nInsira um valor válido!\n")
 
 
+def delete_book(books, position):
+    to_delete = books[position]
+    books.remove(to_delete)
+    print("The book was deleted")
+    show_books(books)
+    return 0
 
 
-
-
+def change_name(books, position):
+    name = input("Type the new name: ")
+    books[position]['name'] = name
+    show_books(books)
+    return 0
