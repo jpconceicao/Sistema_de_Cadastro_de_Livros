@@ -1,6 +1,4 @@
-# MAIN
 from functions import *
-import os
 
 
 def start():
@@ -25,9 +23,14 @@ def start():
 
     # Insert the operation int
     operation = 1
+
     while operation != 0:
-        operation = get_operation()
-        choose_operation(operation, books)
+        try:
+            show_menu()
+            operation = get_operation()
+            choose_operation(operation, books)
+        except Exception:
+            print("\nInsert a valid number!")
 
 
 # Press the green button in the gutter to run the script.

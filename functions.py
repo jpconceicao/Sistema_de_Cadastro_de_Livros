@@ -1,7 +1,3 @@
-# File of functions
-import os
-
-
 def show_title():
     print('#-------------------------------------------------#')
     print('#-------------Book Registration System------------#')
@@ -20,7 +16,6 @@ def show_menu():
 
 
 def get_operation():
-    show_menu()
     return int(input('Enter your option: '))
 
 
@@ -73,32 +68,36 @@ def add_book(books):
 
 
 def search_book(books):
-    name = input("Type the name of a book: ")
-    validate = False
 
-    for book in books:
-        if name == book['name']:
-            validate = True  # Valida que foi encontrado o livro
-            position = books.index(book)  # Captura posição do livro na lista
+    try:
+        name = input("Type the name of a book: ")
+        validate = False
 
-    if not validate:
-        print("\nBook not found!\n")
-        return
+        for book in books:
+            if name == book['name']:
+                validate = True  # Valida que foi encontrado o livro
+                position = books.index(book)  # Captura posição do livro na lista
 
-    operation = 1
-    while operation != 0:
-        if validate:
-            print("\nWhat do you like to do:\n1 - Delete the book\n2 - Change name\n0 - End Search ")
-            operation = int(input("\nYour selection: "))
-            if operation == 1:
-                operation = delete_book(books, position)
-            elif operation == 2:
-                operation = change_name(books, position)
-            elif operation == 0:
-                print("\n\n")
-                return
-            else:
-                print("\nInsira um valor válido!\n")
+        if not validate:
+            print("\nBook not found!\n")
+            return
+
+        operation = 1
+        while operation != 0:
+            if validate:
+                print("\nWhat do you like to do:\n1 - Delete the book\n2 - Change name\n0 - End Search ")
+                operation = get_operation()
+                if operation == 1:
+                    operation = delete_book(books, position)
+                elif operation == 2:
+                    operation = change_name(books, position)
+                elif operation == 0:
+                    print("\n\n")
+                    return
+                else:
+                    print("\nInsira um valor válido!\n")
+    except Exception:
+        print("\nInvalid number! Restarting the program...")
 
 
 def delete_book(books, position):
