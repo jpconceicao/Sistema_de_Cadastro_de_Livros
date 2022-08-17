@@ -46,7 +46,9 @@ def choose_operation(operation, books):
 
 def show_books(books):
     for book in books:
-        print(book)
+        print(f"\nBook's name: {book['name']}")
+        print(f"Book's author: {book['author']}")
+        print(f"Book's year published: {book['published']}")
     print("\n")
 
 
